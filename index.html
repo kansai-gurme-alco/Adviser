@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="関西グルメあるこ - 店舗SNS集客・インフルエンサー活用のご支援">
+    <title>関西グルメあるこ - 店舗SNS集客・インフルエンサー活用支援</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    
+    <style>
+        /* ========================================
+           リセット & 基本設定
+        ======================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* 紺色（ネイビー）- 信頼と誠実 */
+            --primary-color: #001f3f; 
+            --primary-dark: #00152b;
+            --primary-light: #003366;
+            
+            /* オレンジ - 活気と親しみ */
+            --secondary-color: #f39c12;
+            --secondary-dark: #e67e22;
+            
+            /* 赤色（差し色）- 情熱と注目 */
+            --accent-color: #e74c3c;
+            
+            --dark-color: #001f3f;
+            --dark-secondary: #2c3e50;
+            --light-color: #f8f9fa;
+            --white: #ffffff;
+            --text-color: #333333;
+            --text-secondary: #666666;
+            --border-color: #eeeeee;
+            --shadow-light: rgba(0, 31, 63, 0.08);
+            --shadow-medium: rgba(0, 31, 63, 0.12);
+            --transition-fast: 0.3s ease;
+            --font-ja: 'Noto Sans JP', sans-serif;
+            --font-en: 'Poppins', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-ja);
+            color: var(--text-color);
+            line-height: 1.8;
+            overflow-x: hidden;
+            background-color: var(--white);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition-fast);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* ========================================
+           共通レイアウト
+        ======================================== */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            padding: 100px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-tag {
+            display: inline-block;
+            font-family: var(--font-en);
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 3px;
+            background: var(--accent-color);
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 20px auto 0;
+        }
+
+        /* ========================================
+           ヘッダー
+        ======================================== */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 2px 15px var(--shadow-light);
+            z-index: 1000;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 20px;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .nav-brand i {
+            color: var(--accent-color);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-link {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .nav-link:hover {
+            color: var(--secondary-color);
+        }
+
+        .nav-link-cta {
+            background: var(--secondary-color);
+            color: var(--white);
+            padding: 10px 24px;
+            border-radius: 4px;
+            font-weight: 700;
+        }
+
+        .nav-link-cta:hover {
+            background: var(--secondary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(243, 156, 18, 0.3);
+        }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .nav-toggle span {
+            width: 28px;
+            height: 2px;
+            background: var(--primary-color);
+        }
+
+        /* ========================================
+           ヒーローセクション
+        ======================================== */
+        .hero {
+            position: relative;
+            padding-top: 180px;
+            padding-bottom: 100px;
+            background: linear-gradient(135deg, var(--white) 0%, #f0f4f8 100%);
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 40%;
+            height: 100%;
+            background: var(--primary-color);
+            clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);
+            opacity: 0.03;
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 30px;
+            color: var(--primary-color);
+        }
+
+        .hero-title-line {
+            display: block;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 50px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--accent-color);
+            display: block;
+            font-family: var(--font-en);
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-top: 10px;
+            display: block;
+        }
+
+        /* ========================================
+           自己紹介
+        ======================================== */
+        .about {
+            background-color: var(--white);
+        }
+
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 50px;
+            align-items: flex-start;
+        }
+
+        .about-profile {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .profile-card {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 20px 40px var(--shadow-light);
+            text-align: center;
+            border-top: 5px solid var(--secondary-color);
+        }
+
+        .profile-image-wrapper {
+            width: 160px;
+            height: 160px;
+            margin: 0 auto 25px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 6px solid #f8f9fa;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .profile-name {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .profile-role {
+            font-size: 0.9rem;
+            color: var(--secondary-color);
+            font-weight: 700;
+        }
+
+        .about-details {
+            flex: 1.5;
+            min-width: 300px;
+        }
+
+        .detail-card {
+            margin-bottom: 30px;
+            padding: 0 0 20px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .detail-card:last-child {
+            border-bottom: none;
+        }
+
+        .detail-card h4 {
+            margin-bottom: 15px;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.3rem;
+        }
+
+        .detail-card h4 i {
+            color: var(--secondary-color);
+            font-size: 1.1rem;
+        }
+
+        /* ========================================
+           3つの懸念
+        ======================================== */
+        .concerns {
+            background-color: var(--light-color);
+        }
+
+        .concerns-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 50px;
+        }
+
+        .concern-card {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px var(--shadow-light);
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .concern-card:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .concern-main {
+            flex: 1.2;
+            padding: 50px;
+            min-width: 320px;
+        }
+
+        .concern-image-box {
+            flex: 0.8;
+            min-width: 320px;
+        }
+
+        .concern-image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.9);
+        }
+
+        .concern-number {
+            font-family: var(--font-en);
+            font-size: 4rem;
+            font-weight: 900;
+            color: rgba(0, 31, 63, 0.05);
+            line-height: 1;
+            margin-bottom: -25px;
+        }
+
+        .concern-title {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            color: var(--primary-color);
+            position: relative;
+        }
+
+        .concern-worry {
+            background: #fff5f5;
+            padding: 25px;
+            border-radius: 4px;
+            margin-bottom: 30px;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .concern-worry h4 {
+            font-size: 0.95rem;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .concern-solution h4 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+        }
+
+        .concern-solution h4::before {
+            content: '\f058';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: var(--secondary-color);
+        }
+
+        .solution-item {
+            margin-bottom: 20px;
+        }
+
+        .solution-item h5 {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            color: var(--primary-color);
+        }
+
+        .solution-item p {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* ========================================
+           進め方
+        ======================================== */
+        .process {
+            background-color: var(--white);
+        }
+
+        .process-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .process-step {
+            display: flex;
+            gap: 30px;
+            background: var(--white);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px var(--shadow-light);
+            border: 1px solid var(--border-color);
+            transition: var(--transition-fast);
+        }
+
+        .process-step:hover {
+            border-color: var(--secondary-color);
+            transform: translateY(-5px);
+        }
+
+        .step-number {
+            flex-shrink: 0;
+            width: 100px;
+            text-align: center;
+            border-right: 1px solid var(--border-color);
+            padding-right: 30px;
+        }
+
+        .step-number span {
+            display: block;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            font-weight: 800;
+            font-family: var(--font-en);
+        }
+
+        .step-number strong {
+            font-family: var(--font-en);
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            line-height: 1;
+        }
+
+        .step-content h3 {
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+            color: var(--primary-color);
+        }
+
+        .step-list {
+            margin-top: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 12px;
+        }
+
+        .step-list li {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .step-list li i {
+            color: var(--secondary-color);
+            font-size: 0.8rem;
+        }
+
+        .process-cta {
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        /* ========================================
+           フッター & お問い合わせ
+        ======================================== */
+        .contact {
+            background-color: var(--light-color);
+            border-top: 1px solid var(--border-color);
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .contact-card {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px var(--shadow-light);
+            transition: var(--transition-fast);
+        }
+
+        .contact-card:hover {
+            box-shadow: 0 15px 30px var(--shadow-medium);
+        }
+
+        .contact-card-icon {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+
+        .contact-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 18px 50px;
+            background: var(--secondary-color);
+            color: var(--white);
+            border-radius: 4px;
+            font-weight: 800;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 15px rgba(243, 156, 18, 0.2);
+        }
+
+        .btn:hover {
+            background: var(--secondary-dark);
+            transform: scale(1.03);
+            box-shadow: 0 6px 20px rgba(243, 156, 18, 0.3);
+        }
+
+        .footer {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .footer p {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            letter-spacing: 1px;
+        }
+
+        /* ========================================
+           モバイルレスポンシブ
+        ======================================== */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            .nav-toggle {
+                display: flex;
+            }
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            .hero-stats {
+                gap: 30px;
+            }
+            .stat-number {
+                font-size: 1.8rem;
+            }
+            .concern-card {
+                flex-direction: column !important;
+            }
+            .concern-main {
+                padding: 30px 20px;
+            }
+            .concern-image-box {
+                order: -1;
+                height: 250px;
+            }
+            .step-number {
+                width: 70px;
+                padding-right: 20px;
+            }
+            .step-number strong {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ヘッダー -->
+    <header class="header">
+        <nav class="nav container">
+            <div class="nav-brand">
+                <i class="fas fa-utensils"></i>
+                <span>関西グルメあるこ</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#about" class="nav-link">自己紹介</a></li>
+                <li><a href="#concerns" class="nav-link">3つの懸念</a></li>
+                <li><a href="#process" class="nav-link">進め方</a></li>
+                <li><a href="#contact" class="nav-link nav-link-cta">お問い合わせ</a></li>
+            </ul>
+            <button class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- ヒーローセクション -->
+    <section class="hero">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">
+                    <span class="hero-title-line">店舗SNS集客</span>
+                    <span class="hero-title-line">インフルエンサー活用のご支援</span>
+                </h1>
+
+
+
+
+
+
+
+
+
+
+            </div>
+
+
+
+        </div>
+    </section>
+
+    <!-- 自己紹介セクション -->
+    <section id="about" class="section about">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">About Me</span>
+                <h2 class="section-title">自己紹介</h2>
+            </div>
+
+            <div class="about-content">
+                <div class="about-profile">
+                    <div class="profile-card">
+                        <div class="profile-image-wrapper">
+                            <img src="https://sspark.genspark.ai/cfimages?u1=Ifi0Zixk2bKNpAwFg%2FoT2FE2Yl3ohNZxFsqqYTsIv%2F1ceoxyhKQM2i3cBb8bHpepnXFq37BCcGEnTK%2BH6aeWxo5dRak9oRYEWaOpRo%2FSnfW%2FFA%3D%3D&u2=yaGZyvn7GAfgBI1%2F&width=800" alt="関西グルメあるこ" class="profile-image">
+                        </div>
+                        <h3 class="profile-name">関西グルメあるこ</h3>
+                    </div>
+                </div>
+
+                <div class="about-details">
+                    <div class="detail-card">
+                        <h4><i class="fas fa-chart-line"></i> 実績</h4>
+                        <p>・Instagram開設1.5ヶ月でフォロワー1,000人へ</p>
+                        <p>・1ヶ月で31件のPR案件を実施</p>
+                        <p>・店舗様向け 自己紹介サイトの構築、運営</p>
+                    </div>
+                    <div class="detail-card">
+                        <h4><i class="fas fa-lightbulb"></i> 活動理念</h4>
+                        <p>単なる「PR紹介」のインフルエンサーではなく、</p>
+                        <p>店舗様を尊重したうえでパートナーとして、SNS集客のご支援をいたします。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3つの懸念セクション -->
+    <section id="concerns" class="section concerns">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Solutions</span>
+                <h2 class="section-title">店舗が抱える「SNS運用の3つの懸念」</h2>
+                <p class="section-subtitle">店舗様の不安に対し、現役インフルエンサーの視点から解決策を提示します</p>
+            </div>
+
+            <div class="concerns-grid">
+                <!-- 懸念1 -->
+                <div class="concern-card">
+                    <div class="concern-main">
+                        <div class="concern-number">01</div>
+                        <h3 class="concern-title">「売上・利益」に直結するか分からない</h3>
+                        <div class="concern-worry">
+                            <h4>よくある懸念</h4>
+                            <p>「来店に繋がったとしても、低単価なメニューだけで長居する客層ばかりにならないか？」</p>
+                            <p>「費用対効果の測り方が分からない」</p>
+                        </div>
+                        <div class="concern-solution">
+                            <h4>ご支援できること</h4>
+                            <div class="solution-item">
+                                <h5>最適なインフルエンサーの選定</h5>
+                                <p>数値データに基づき、貴店の世界観を壊さず、ターゲット層に響くインフルエンサーの選定を支援します。</p>
+                            </div>
+                            <div class="solution-item">
+                                <h5>シミュレーション</h5>
+                                <p>過去のデータから予測リーチ数を割り出し、貴店の客単価や原価率を考慮してコスト回収の見込みを算出します。</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="concern-image-box">
+                        <img src="https://sspark.genspark.ai/cfimages?u1=9yFNjXHnua%2BOPKk30S0UZeA9UIKsWUACiODmjm6D0AF%2Bp3ZcOv4ZZYfqaP%2Bv2Icp6fDDaWXUpmW1w3HiMMLqmTyQ4kSn6ObcLQY9E7ZfGakHyyO%2FZa%2BbLYTBap3MJIt%2BqnpeOv1R7nMnNvPXLQ7cnUtLzb97i3g%3D&u2=xzdNZhrnLFtflotd&width=800" alt="ビジネスコンサルティング">
+                    </div>
+                </div>
+
+                <!-- 懸念2 -->
+                <div class="concern-card">
+                    <div class="concern-main">
+                        <div class="concern-number">02</div>
+                        <h3 class="concern-title">「お店の世界観」や「ブランドイメージ」を損なわないか</h3>
+                        <div class="concern-worry">
+                            <h4>よくある懸念</h4>
+                            <p>「不自然な加工で料理の色味を損ねたくない」</p>
+                            <p>「正しい情報やこだわり（素材・製法）を伝えてほしい」</p>
+                        </div>
+                        <div class="concern-solution">
+                            <h4>ご支援できること</h4>
+                            <div class="solution-item">
+                                <h5>自社運用サポート</h5>
+                                <p>プロフィールの設計から最新アルゴリズム、効率的な編集方法まで現役のノウハウを共有します。</p>
+                            </div>
+                            <div class="solution-item">
+                                <h5>素材の活用提案</h5>
+                                <p>「素材の二次利用」を条件に盛り込むなど、単発のPRで終わらせない戦略的な座組みをご提案します。</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="concern-image-box">
+                        <img src="https://sspark.genspark.ai/cfimages?u1=mmRjzGlzyhNTBvuch13%2Bh9BDcJIjMU5aMu4cq9Fs5fqVFzK78%2FtqAb5rwdFV1aIriViT29YEZoodccn7LW98xqJ1KI7t8q1PqaLU6s5eY7RY0oIsMc1Df5cYx48cjiFOh%2FlTrLyQQwjkWGLCEq%2ByQWwoAPU8kqI9TTWM1nP8%2F9KI6DE9oZTnk0c%2Fi6qLrrEG&u2=jpn792YpKE8BBiVV&width=800" alt="美しい料理の盛り付け">
+                    </div>
+                </div>
+
+                <!-- 懸念3 -->
+                <div class="concern-card">
+                    <div class="concern-main">
+                        <div class="concern-number">03</div>
+                        <h3 class="concern-title">運用に使える「質の高い素材」が足りない</h3>
+                        <div class="concern-worry">
+                            <h4>よくある懸念</h4>
+                            <p>「何が『美味しそう』に見える構図なのか分からない」</p>
+                            <p>「センスが必要そうだからとりあえずスマホで撮って載せている」</p>
+                        </div>
+                        <div class="concern-solution">
+                            <h4>ご支援できること</h4>
+                            <div class="solution-item">
+                                <h5>撮影アドバイス</h5>
+                                <p>私自身、カメラ撮影を得意としておりますので、</p>
+                                <p>料理が最も魅力的に見える構図やライティングのアドバイスが可能です。</p>
+                            </div>
+                            <div class="solution-item">
+                                <h5>素材提供</h5>
+                                <p>私自身のカメラで撮影した高品質な素材を提供し、貴店のアカウント等で活用いただける体制を整えます。</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="concern-image-box">
+                        <img src="https://sspark.genspark.ai/cfimages?u1=MOkIDYjwVlkX04Q8mWghSjaztPxbXGEN7VhZJGwyez33l7FJ5D%2FXlky1htHMS%2Bk9sM%2BqpW2XOGfKbmB7rCbP%2BuPRZ1boX32mIOFAKFRwWbMd313xHyXz0hxM1E0OWSf2u1%2Fg3fvQIF5nTSa02%2B%2BVFVtH08BPHmVxUri9wNDcDQ%2BQbCFk3o2U&u2=tXirB4bIU52VzLig&width=800" alt="レストランのSNSマーケティング">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 進め方セクション -->
+    <section id="process" class="section process">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Process</span>
+                <h2 class="section-title">今後について</h2>
+                <p class="section-subtitle">貴店に最適なSNS集客戦略を、3つのステップでご支援します</p>
+            </div>
+
+            <div class="process-timeline">
+                <div class="process-step">
+                    <div class="step-number">
+                        <span>STEP</span>
+                        <strong>01</strong>
+                    </div>
+                    <div class="step-content">
+                        <h3>現状のヒアリングと課題の整理</h3>
+                        <p>現在の集客状況をお聞かせいただき、課題を明確にし、施策の方向性を定めます。</p>
+                        <ul class="step-list">
+                            <li><i class="fas fa-circle-check"></i> SNS運用状況の確認</li>
+                            <li><i class="fas fa-circle-check"></i> ターゲット客層の明確化</li>
+                            <li><i class="fas fa-circle-check"></i> 集客課題の洗い出し</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">
+                        <span>STEP</span>
+                        <strong>02</strong>
+                    </div>
+                    <div class="step-content">
+                        <h3>最適な運用の方向性を検討</h3>
+                        <p>自社運用とインフルエンサー活用を比較し、リソースに合わせた戦略を提案します。</p>
+                        <ul class="step-list">
+                            <li><i class="fas fa-circle-check"></i> 投資対効果シミュレーション</li>
+                            <li><i class="fas fa-circle-check"></i> メリット・デメリット比較</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">
+                        <span>STEP</span>
+                        <strong>03</strong>
+                    </div>
+                    <div class="step-content">
+                        <h3>具体的な行動プランの実施</h3>
+                        <p>撮影、投稿、キャスティング等、戦略に基づいた施策を実行します。</p>
+                        <ul class="step-list">
+                            <li><i class="fas fa-circle-check"></i> 撮影・コンテンツ制作</li>
+                            <li><i class="fas fa-circle-check"></i> キャスティング実施</li>
+                            <li><i class="fas fa-circle-check"></i> 効果測定と改善提案</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 関西グルメあるこ. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navToggle = document.getElementById('navToggle');
+            const navMenu = document.querySelector('.nav-menu');
+
+            // モバイルメニュー切り替え
+            navToggle.addEventListener('click', () => {
+                const isVisible = navMenu.style.display === 'flex';
+                navMenu.style.display = isVisible ? 'none' : 'flex';
+                navMenu.style.flexDirection = 'column';
+                navMenu.style.position = 'absolute';
+                navMenu.style.top = '100%';
+                navMenu.style.left = '0';
+                navMenu.style.width = '100%';
+                navMenu.style.background = 'white';
+                navMenu.style.padding = '20px';
+                navMenu.style.boxShadow = '0 10px 10px rgba(0,0,0,0.1)';
+            });
+
+            // スムーススクロール
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        window.scrollTo({
+                            top: target.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                    // モバイルメニューが開いている場合は閉じる
+                    if (window.innerWidth <= 768) {
+                        navMenu.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
